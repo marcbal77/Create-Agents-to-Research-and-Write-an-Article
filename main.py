@@ -1,3 +1,7 @@
+# Warning control
+import warnings
+warnings.filterwarnings('ignore')
+
 from crewai import Agent, Task, Crew, Process
 from langchain.tools import DuckDuckGoSearchRun
 
