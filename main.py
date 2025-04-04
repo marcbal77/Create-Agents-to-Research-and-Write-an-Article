@@ -112,3 +112,11 @@ crew = Crew(
     tasks=[plan, write, edit],
     verbose=2
 )
+
+from langchain_community.llms import HuggingFaceHub
+
+llm = HuggingFaceHub(
+    repo_id="HuggingFaceH4/zephyr-7b-beta",
+    huggingfacehub_api_token="<HF_TOKEN_HERE>",
+    task="text-generation",
+)
