@@ -120,3 +120,6 @@ llm = HuggingFaceHub(
     huggingfacehub_api_token="<HF_TOKEN_HERE>",
     task="text-generation",
 )
+
+# Note: LLMs can provide different outputs for they same input
+result = crew.kickoff(inputs={"topic": "Artificial Intelligence"})
