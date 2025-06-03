@@ -113,13 +113,13 @@ crew = Crew(
     verbose=2
 )
 
-from langchain_community.llms import HuggingFaceHub
+# Note: LLMs can provide different outputs for they same input
+result = crew.kickoff(inputs={"topic": "Artificial Intelligence"})
+
+from langchain_community.llms import HuggingFaceHubi
 
 llm = HuggingFaceHub(
     repo_id="HuggingFaceH4/zephyr-7b-beta",
     huggingfacehub_api_token="<HF_TOKEN_HERE>",
     task="text-generation",
 )
-
-# Note: LLMs can provide different outputs for they same input
-result = crew.kickoff(inputs={"topic": "Artificial Intelligence"})
