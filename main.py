@@ -10,11 +10,14 @@ from utils import get_openai_api_key
 openai_api_key = get_openai_api_key()
 os.environ["OPENAI_MODEL_NAME"] = 'gpt-3.5-turbo'
 
+# Define the topic - change this to research any topic you want
+topic = "Artificial Intelligence"
+
 planner = Agent(
     role="Content Planner",
-    goal="Plan engaging and factually accurate content on {topic}",
-    backstory="You're working on planning a blog article "
-              "about the topic: {topic}."
+    goal=f"Plan engaging and factually accurate content on {topic}",
+    backstory=f"You're working on planning a blog article "
+              f"about the topic: {topic}."
               "You collect information that helps the "
               "audience learn something "
               "and make informed decisions. "
@@ -26,10 +29,10 @@ planner = Agent(
 
 writer = Agent(
     role="Content Writer",
-    goal="Write insightful and factually accurate "
-         "opinion piece about the topic: {topic}",
-    backstory="You're working on a writing "
-              "a new opinion piece about the topic: {topic}. "
+    goal=f"Write insightful and factually accurate "
+         f"opinion piece about the topic: {topic}",
+    backstory=f"You're working on a writing "
+              f"a new opinion piece about the topic: {topic}. "
               "You base your writing on the work of "
               "the Content Planner, who provides an outline "
               "and relevant context about the topic. "
@@ -64,8 +67,8 @@ editor = Agent(
 
 plan = Task(
     description=(
-        "1. Prioritize the latest trends, key players, "
-            "and noteworthy news on {topic}.\n"
+        f"1. Prioritize the latest trends, key players, "
+            f"and noteworthy news on {topic}.\n"
         "2. Identify the target audience, considering "
             "their interests and pain points.\n"
         "3. Develop a detailed content outline including "
@@ -80,8 +83,8 @@ plan = Task(
 
 write = Task(
     description=(
-        "1. Use the content plan to craft a compelling "
-            "blog post on {topic}.\n"
+        f"1. Use the content plan to craft a compelling "
+            f"blog post on {topic}.\n"
         "2. Incorporate SEO keywords naturally.\n"
 		"3. Sections/Subtitles are properly named "
             "in an engaging manner.\n"
@@ -114,12 +117,7 @@ crew = Crew(
 )
 
 # Note: LLMs can provide different outputs for they same input
-result = crew.kickoff(inputs={"topic": "Artificial Intelligence"})
+result = crew.kickoff()
 
-from langchain_community.llms import HuggingFaceHubi
-
-llm = HuggingFaceHub(
-    repo_id="HuggingFaceH4/zephyr-7b-beta",
-    huggingfacehub_api_token="<HF_TOKEN_HERE>",
-    task="text-generation",
-)
+print("Final Result:")
+print(result)
